@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>すぬまるちゃんのおみくじ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="shrine">
+    <h1 class="title">すぬまるちゃんの<br>おみくじ</h1>
+
+    <!-- キャラクター -->
+    <div class="character-area">
+      <div class="speech-bubble" id="speechBubble">
+        えぇえぇ、どもです～！すぬまるだよ。<br>お尻を燃やしてひびを読む占い、<br>これが一番精度高いんだよね！
+      </div>
+      <img src="img/1.jpeg" alt="すぬまるちゃん" class="character-img" id="characterImg">
+    </div>
+
+    <!-- 待機画面 -->
+    <div class="box-wrapper" id="boxWrapper">
+      <p class="method-desc">亀卜の儀式にならい<br>すぬまるちゃん自身のお尻を燃やし<br>ひびの入り方で運勢を占います</p>
+      <button class="draw-btn" id="drawBtn" onclick="drawOmikuji()">占いを始める</button>
+    </div>
+
+    <!-- お尻燃焼エリア -->
+    <div class="butt-wrapper" id="buttWrapper" style="display:none;">
+      <canvas class="spark-canvas" id="sparkCanvas"></canvas>
+      <div class="butt-container" id="buttContainer">
+        <img src="img/2.jpeg" alt="すぬまるちゃんのお尻" class="butt-img" id="buttImg">
+        <div class="fire-overlay fire-layer-1" id="fireOverlay1"></div>
+        <div class="fire-overlay fire-layer-2" id="fireOverlay2"></div>
+        <div class="fire-overlay fire-layer-3" id="fireOverlay3"></div>
+        <div class="fire-overlay fire-layer-4" id="fireOverlay4"></div>
+        <canvas class="crack-canvas" id="crackCanvas"></canvas>
+      </div>
+      <button class="draw-btn phase-btn" id="phaseBtn" onclick="nextPhase()"></button>
+    </div>
+
+    <!-- 結果 -->
+    <div class="result-wrapper" id="resultWrapper" style="display:none;">
+      <div class="paper" id="paper">
+        <div class="paper-header">
+          <span class="fortune-label">運勢</span>
+          <div class="fortune-rank" id="fortuneRank"></div>
+        </div>
+        <div class="divider"></div>
+        <div class="fortune-items" id="fortuneItems"></div>
+        <div class="precure-section">
+          <p class="precure-label">すぬまるおすすめプリキュア</p>
+          <p class="precure-name" id="precureName"></p>
+          <p class="precure-reason" id="precureReason"></p>
+        </div>
+      </div>
+      <button class="draw-btn again-btn" onclick="reset()">もう一度占う</button>
+    </div>
+  </div>
+
+  <div class="lantern lantern-left"></div>
+  <div class="lantern lantern-right"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>

@@ -1,53 +1,6 @@
 # すぬまるちゃんのおみくじ
 
-すぬまるちゃんが自身のお尻を燃やし、ひびの入り方で運勢を占うWebアプリです。LAN内の任意のデバイスからアクセスできます。
-
----
-
-## 起動方法
-
-### 1. WSL2でサーバーを起動
-
-WSLのターミナルで以下を実行します。
-
-```bash
-cd /mnt/c/Users/takum/Documents/etc/snmr
-python3 -m http.server 8080 --bind 0.0.0.0
-```
-
-### 2. ポートフォワード設定（WSL2再起動後に毎回必要）
-
-PowerShellを **管理者として実行** し、以下を順番に実行します。
-
-```powershell
-# WSL2のIPアドレスを取得
-wsl hostname -I
-
-# ポートフォワード設定（YOUR_WSL_IPは上で確認したIPに置き換え）
-netsh interface portproxy delete v4tov4 listenport=8080 listenaddress=0.0.0.0
-netsh interface portproxy add v4tov4 listenport=8080 listenaddress=0.0.0.0 connectport=8080 connectaddress=YOUR_WSL_IP
-```
-
-### 3. ファイアウォール設定（初回のみ）
-
-同じ管理者PowerShellで実行します。
-
-```powershell
-New-NetFirewallRule -DisplayName "WSL2 Omikuji" -Direction Inbound -Protocol TCP -LocalPort 8080 -Action Allow
-```
-
-### 4. アクセス
-
-WindowsのIPアドレスを確認します。
-
-```powershell
-ipconfig
-```
-
-| 端末 | URL |
-|------|-----|
-| このPC | http://localhost:8080 |
-| LAN内の他のデバイス | http://[WindowsのIPアドレス]:8080 |
+すぬまるちゃんが自身のお尻を燃やし、ひびの入り方で運勢を占うWebアプリです。
 
 ---
 

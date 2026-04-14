@@ -8,18 +8,24 @@
 </head>
 <body>
   <div class="shrine">
-    <h1 class="title">すぬまるちゃんの<br>おみくじ</h1>
+    <h1 class="title">すぬまるちゃん</h1>
 
     <!-- キャラクター -->
     <div class="character-area">
       <div class="speech-bubble" id="speechBubble">
-        えぇえぇ、どもです～！すぬまるだよ。<br>お尻を燃やしてひびを読む占い、<br>これが一番精度高いんだよね！
+        えぇえぇ、どもです～！すぬまるだよ。<br>何する？
       </div>
       <img src="img/1.jpeg" alt="すぬまるちゃん" class="character-img" id="characterImg">
     </div>
 
+    <!-- モード選択 -->
+    <div class="mode-wrapper" id="modeWrapper">
+      <button class="draw-btn" onclick="selectMode('omikuji')">おみくじを引く</button>
+      <button class="draw-btn" onclick="selectMode('chat')">すぬまるとチャット</button>
+    </div>
+
     <!-- 待機画面 -->
-    <div class="box-wrapper" id="boxWrapper">
+    <div class="box-wrapper" id="boxWrapper" style="display:none;">
       <p class="method-desc">亀卜の儀式にならい<br>すぬまるちゃん自身のお尻を燃やし<br>ひびの入り方で運勢を占います</p>
       <button class="draw-btn" id="drawBtn" onclick="drawOmikuji()">占いを始める</button>
     </div>
@@ -53,7 +59,18 @@
           <p class="precure-reason" id="precureReason"></p>
         </div>
       </div>
-      <button class="draw-btn again-btn" onclick="reset()">もう一度占う</button>
+      <button class="draw-btn again-btn" onclick="playAgain()">もう一度占う</button>
+      <button class="draw-btn back-btn" onclick="reset()">もどる</button>
+    </div>
+
+    <!-- チャット -->
+    <div class="chat-wrapper" id="chatWrapper" style="display:none;">
+      <div class="chat-messages" id="chatMessages"></div>
+      <div class="chat-input-area">
+        <input type="text" id="chatInput" class="chat-input" placeholder="メッセージを送る..." onkeydown="if(event.key==='Enter')sendChat()">
+        <button class="draw-btn send-btn" onclick="sendChat()">送る</button>
+      </div>
+      <button class="draw-btn back-btn" onclick="goBack()">もどる</button>
     </div>
   </div>
 

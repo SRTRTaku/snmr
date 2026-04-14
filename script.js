@@ -371,19 +371,101 @@ function showResult(fortune) {
   document.getElementById('resultWrapper').style.display = 'flex';
 }
 
-function reset() {
-  document.getElementById('resultWrapper').style.display = 'none';
-
+function clearOmikujiState() {
   setFireLayers(false);
   stopSparks();
   const crackCanvas = document.getElementById('crackCanvas');
   crackCanvas.classList.remove('visible');
   const ctx = crackCanvas.getContext('2d');
   ctx.clearRect(0, 0, crackCanvas.width, crackCanvas.height);
+  document.getElementById('drawBtn').disabled = false;
+  document.getElementById('resultWrapper').style.display = 'none';
+}
 
+function playAgain() {
+  clearOmikujiState();
   setSpeech('えぇえぇ、どもです～！もう一回占う？すぬまるのお尻はいつでも戦える状態だよ！');
-
-  const btn = document.getElementById('drawBtn');
-  btn.disabled = false;
   document.getElementById('boxWrapper').style.display = 'flex';
+}
+
+function reset() {
+  clearOmikujiState();
+  goBack();
+}
+
+/* ===== モード選択 ===== */
+
+function selectMode(mode) {
+  document.getElementById('modeWrapper').style.display = 'none';
+  if (mode === 'omikuji') {
+    setSpeech('えぇえぇ、どもです～！すぬまるだよ。<br>お尻を燃やしてひびを読む占い、<br>これが一番精度高いんだよね！');
+    document.getElementById('boxWrapper').style.display = 'flex';
+  } else {
+    setSpeech('えぇえぇ、どもです～！チャットしよ！なんか話しかけてよ！');
+    document.getElementById('chatWrapper').style.display = 'flex';
+    document.getElementById('chatMessages').innerHTML = '';
+    document.getElementById('chatInput').value = '';
+    document.getElementById('chatInput').focus();
+  }
+}
+
+function goBack() {
+  document.getElementById('boxWrapper').style.display = 'none';
+  document.getElementById('chatWrapper').style.display = 'none';
+  document.getElementById('resultWrapper').style.display = 'none';
+  setSpeech('えぇえぇ、どもです～！何する？');
+  document.getElementById('modeWrapper').style.display = 'flex';
+}
+
+/* ===== チャット ===== */
+
+const CHAT_RESPONSES = [
+  'えぇえぇ、どもです～！ちょっと待って、今プリキュアのこと考えてた！なんだっけ？',
+  'えぇえぇ！どもです～！イオンタウン名西にプリキュアの新グッズ入ってたんだよ、やばいよ！',
+  'えぇえぇ、どもです～！すぬまるね、今日もお尻の調子いいよ！占い的にも吉だわ！',
+  'えぇえぇ！どもです～！キュアフローラって最高だよね、って話してた？違う？ごめん！',
+  'えぇえぇ、どもです～！なんか言った？ゴープリ見てたら聞こえなかったわ！',
+  'えぇえぇ！どもです～！イオンタウン名西のフードコートで何食べようか悩んでるんだよね～！',
+  'えぇえぇ、どもです～！プリキュアって人生だよね、すぬまるはそう思う！',
+  'えぇえぇ！どもです～！あ、今日ガチャで何出たか聞く？キュアサマーだったよ！すごくない！',
+  'えぇえぇ、どもです～！お尻燃やすの最近はまってて、まじで精度上がってきたと思う！',
+  'えぇえぇ！どもです～！ごめんごめん、プリキュアの話してていい？絶対面白いから！',
+  'えぇえぇ、どもです～！すぬまる的にはキュアハッピーが一番好きかな、今は！昨日はフローラだったけど！',
+  'えぇえぇ！どもです～！イオンタウン名西って最高だよね、何でも揃うし！',
+  'えぇえぇ、どもです～！ちゃんと聞いてるよ！…えっ何の話だっけ？',
+  'えぇえぇ！どもです～！プリキュアのBGM聴きながら話すのって最高じゃん、そう思わない？',
+  'えぇえぇ、どもです～！さっきお尻で占ったら中吉だったよ！まずまずだね！',
+  'えぇえぇ！どもです～！うんうん！で、キュアエールの話していい？',
+  'えぇえぇ、どもです～！それってイオンタウン名西で解決できるやつじゃない？',
+  'えぇえぇ！どもです～！スマイルプリキュア全話見返してたとこだったんだよね、タイミング！',
+  'えぇえぇ、どもです～！すぬまるのお尻がなんか言いたそうにしてる、ちょっと待ってね！',
+  'えぇえぇ！どもです～！プリキュアで言うと今どのへんの気分？すぬまるは最終決戦前くらいかな！',
+];
+
+function sendChat() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  const messages = document.getElementById('chatMessages');
+
+  const userMsg = document.createElement('div');
+  userMsg.className = 'chat-msg user-msg';
+  userMsg.textContent = text;
+  messages.appendChild(userMsg);
+
+  input.value = '';
+
+  setTimeout(() => {
+    const response = pick(CHAT_RESPONSES);
+    const snuMsg = document.createElement('div');
+    snuMsg.className = 'chat-msg snu-msg';
+    snuMsg.textContent = response;
+    messages.appendChild(snuMsg);
+    setSpeech(response);
+    messages.scrollTop = messages.scrollHeight;
+  }, 400);
+
+  messages.scrollTop = messages.scrollHeight;
+  input.focus();
 }

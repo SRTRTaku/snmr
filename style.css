@@ -98,6 +98,14 @@ body {
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* --- モード選択 --- */
+.mode-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
 /* --- 待機画面 --- */
 .box-wrapper {
   display: flex;
@@ -395,6 +403,95 @@ body {
   font-size: 0.78rem;
   color: #3a2800;
   line-height: 1.7;
+}
+
+/* --- チャット --- */
+.chat-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 320px;
+}
+
+.chat-messages {
+  width: 100%;
+  height: 280px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 0.75rem;
+  background: rgba(255, 248, 220, 0.06);
+  border: 1px solid #6b4c10;
+  border-radius: 8px;
+}
+
+.chat-msg {
+  max-width: 85%;
+  padding: 0.55rem 0.85rem;
+  border-radius: 12px;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  animation: fadeIn 0.3s ease;
+}
+
+.user-msg {
+  align-self: flex-end;
+  background: rgba(200, 134, 10, 0.25);
+  color: #f5d87a;
+  border: 1px solid rgba(200, 134, 10, 0.4);
+  border-bottom-right-radius: 4px;
+}
+
+.snu-msg {
+  align-self: flex-start;
+  background: rgba(255, 248, 220, 0.9);
+  color: #3a2800;
+  border: 1px solid #d4b870;
+  border-bottom-left-radius: 4px;
+}
+
+.chat-input-area {
+  display: flex;
+  width: 100%;
+  gap: 0.5rem;
+}
+
+.chat-input {
+  flex: 1;
+  padding: 0.6rem 0.9rem;
+  font-family: 'Noto Serif JP', serif;
+  font-size: 0.9rem;
+  border: 1px solid #6b4c10;
+  border-radius: 4px;
+  background: rgba(255, 248, 220, 0.08);
+  color: #f5d87a;
+  outline: none;
+}
+
+.chat-input::placeholder {
+  color: rgba(200, 169, 110, 0.5);
+}
+
+.chat-input:focus {
+  border-color: #c8a055;
+  background: rgba(255, 248, 220, 0.12);
+}
+
+.send-btn {
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.back-btn {
+  font-size: 0.85rem;
+  padding: 0.5rem 1.5rem;
+  letter-spacing: 0.2em;
+  opacity: 0.8;
 }
 
 /* --- 提灯 --- */
